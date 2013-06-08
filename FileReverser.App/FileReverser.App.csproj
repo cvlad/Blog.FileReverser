@@ -43,7 +43,12 @@
   <ItemGroup>
     <Compile Include="ConsoleOutputter.cs" />
     <Compile Include="FileReverser.cs" />
+    <Compile Include="IFileChecker.cs" />
+    <Compile Include="IInput.cs" />
+    <Compile Include="InputFileValidator.cs" />
     <Compile Include="IOutputter.cs" />
+    <Compile Include="IPermissionChecker.cs" />
+    <Compile Include="ITextFileChecker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

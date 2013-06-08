@@ -22,7 +22,7 @@
         static void Main()
         {
             var outputter = new ConsoleOutputter();
-            var fileReverser = new FileReverser(outputter);
+            var fileReverser = new FileReverser(outputter, null);
 
             fileReverser.PromptForInput();
         }
