@@ -1,6 +1,6 @@
 namespace FileReverser.App
 {
-    class FileChecker : IFileChecker
+    public class FileChecker : IFileChecker
     {
         public bool FileExists(string fileName)
         {

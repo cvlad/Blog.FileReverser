@@ -1,4 +1,7 @@
-﻿namespace FileReverser.App
+﻿using System.Reflection;
+using Autofac;
+
+namespace FileReverser.App
 {
     /*
      * Requirements:
@@ -21,18 +24,27 @@
     {
         static int Main()
         {
-            var outputter = new ConsoleOutputter();
-            var inputValidator = new InputFileValidator(new FileChecker(), new TextFileChecker(), new PermissionChecker());
-            var input = new ConsoleInput();
-            var fileReverser = new FileReverser(outputter, input, inputValidator);
+            var container = SetupDependencyInjection();
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var fileReverser = scope.Resolve<IFileReverser>();
 
-            fileReverser.PromptForInput();
-            var inputFile = fileReverser.ReadInput();
-            var validationResult = fileReverser.ValidateInput(inputFile);
-            if (validationResult.HasValue)
-                return validationResult.Value;
+                fileReverser.PromptForInput();
 
-            return 0;
+                var inputFile = fileReverser.ReadInput();
+                var validationResult = fileReverser.ValidateInput(inputFile);
+                if (validationResult.HasValue)
+                    return validationResult.Value;
+
+                return 0;
+            }
+        }
+
+        private static IContainer SetupDependencyInjection()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces();
+            return builder.Build();
         }
     }
 }

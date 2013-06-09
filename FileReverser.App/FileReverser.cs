@@ -1,6 +1,6 @@
 ﻿namespace FileReverser.App
 {
-    public class FileReverser
+    public class FileReverser : IFileReverser
     {
         private readonly IOutputter _outputter;
         private readonly IInput _input;

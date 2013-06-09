@@ -3,7 +3,7 @@ using System.Security.Permissions;
 
 namespace FileReverser.App
 {
-    class PermissionChecker : IPermissionChecker
+    public class PermissionChecker : IPermissionChecker
     {
         public bool CanReadFile(string fileName)
         {
