@@ -23,10 +23,10 @@ namespace FileReverser.Facts
             var permissionCheckerMock = new Mock<IPermissionChecker>();
             permissionCheckerMock.Setup(pc => pc.CanReadFile(fileName)).Verifiable();
 
-            var validator = new InputFileValidator(fileCheckerMock.Object, textFileCheckerMock.Object, permissionCheckerMock.Object, fileName);
+            var validator = new InputFileValidator(fileCheckerMock.Object, textFileCheckerMock.Object, permissionCheckerMock.Object);
 
             // When
-            validator.Validate();
+            validator.Validate(fileName);
 
             // Then
             fileCheckerMock.Verify();
@@ -49,10 +49,10 @@ namespace FileReverser.Facts
             var permissionsCheckerStub = new Mock<IPermissionChecker>();
             permissionsCheckerStub.Setup(pc => pc.CanReadFile(fileName)).Returns(true).Verifiable();
 
-            var validator = new InputFileValidator(fileCheckerStub.Object, textFileCheckerStub.Object, permissionsCheckerStub.Object, fileName);
+            var validator = new InputFileValidator(fileCheckerStub.Object, textFileCheckerStub.Object, permissionsCheckerStub.Object);
 
             // When
-            var result = validator.Validate();
+            var result = validator.Validate(fileName);
 
             // Then
             result.Should().Be(0);
@@ -65,10 +65,10 @@ namespace FileReverser.Facts
             var fileName = string.Empty;
             var fileCheckerStub = new Mock<IFileChecker>();
             fileCheckerStub.Setup(fc => fc.FileExists(fileName)).Returns(false);
-            var validator = new InputFileValidator(fileCheckerStub.Object, null, null, fileName);
+            var validator = new InputFileValidator(fileCheckerStub.Object, null, null);
 
             // When
-            var result = validator.Validate();
+            var result = validator.Validate(fileName);
 
             // Then
             result.Should().Be(1);
@@ -86,10 +86,10 @@ namespace FileReverser.Facts
             var textFileCheckerStub = new Mock<ITextFileChecker>();
             textFileCheckerStub.Setup(tfc => tfc.IsTextFile(fileName)).Returns(false).Verifiable();
 
-            var validator = new InputFileValidator(fileCheckerStub.Object, textFileCheckerStub.Object, null, fileName);
+            var validator = new InputFileValidator(fileCheckerStub.Object, textFileCheckerStub.Object, null);
 
             // When
-            var result = validator.Validate();
+            var result = validator.Validate(fileName);
 
             // Then
             result.Should().Be(2);
@@ -110,10 +110,10 @@ namespace FileReverser.Facts
             var permissionsCheckerStub = new Mock<IPermissionChecker>();
             permissionsCheckerStub.Setup(pc => pc.CanReadFile(fileName)).Returns(false).Verifiable();
 
-            var validator = new InputFileValidator(fileCheckerStub.Object, textFileCheckerStub.Object, permissionsCheckerStub.Object, fileName);
+            var validator = new InputFileValidator(fileCheckerStub.Object, textFileCheckerStub.Object, permissionsCheckerStub.Object);
 
             // When
-            var result = validator.Validate();
+            var result = validator.Validate(fileName);
 
             // Then
             result.Should().Be(3);

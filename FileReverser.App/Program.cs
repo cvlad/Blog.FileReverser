@@ -19,12 +19,20 @@
      */
     static class Program
     {
-        static void Main()
+        static int Main()
         {
             var outputter = new ConsoleOutputter();
-            var fileReverser = new FileReverser(outputter, null);
+            var inputValidator = new InputFileValidator(new FileChecker(), new TextFileChecker(), new PermissionChecker());
+            var input = new ConsoleInput();
+            var fileReverser = new FileReverser(outputter, input, inputValidator);
 
             fileReverser.PromptForInput();
+            var inputFile = fileReverser.ReadInput();
+            var validationResult = fileReverser.ValidateInput(inputFile);
+            if (validationResult.HasValue)
+                return validationResult.Value;
+
+            return 0;
         }
     }
 }

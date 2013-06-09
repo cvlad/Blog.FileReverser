@@ -41,16 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleInput.cs" />
     <Compile Include="ConsoleOutputter.cs" />
+    <Compile Include="FileChecker.cs" />
     <Compile Include="FileReverser.cs" />
     <Compile Include="IFileChecker.cs" />
     <Compile Include="IInput.cs" />
+    <Compile Include="IInputValidator.cs" />
     <Compile Include="InputFileValidator.cs" />
     <Compile Include="IOutputter.cs" />
     <Compile Include="IPermissionChecker.cs" />
     <Compile Include="ITextFileChecker.cs" />
+    <Compile Include="PermissionChecker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextFileChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

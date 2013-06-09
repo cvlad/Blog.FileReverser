@@ -1,27 +1,25 @@
 namespace FileReverser.App
 {
-    public class InputFileValidator
+    public class InputFileValidator : IInputValidator
     {
         private readonly IFileChecker _fileChecker;
         private readonly ITextFileChecker _textFileChecker;
         private readonly IPermissionChecker _permissionsChecker;
-        private readonly string _fileName;
 
-        public InputFileValidator(IFileChecker fileChecker, ITextFileChecker textFileChecker, IPermissionChecker permissionChecker, string fileName)
+        public InputFileValidator(IFileChecker fileChecker, ITextFileChecker textFileChecker, IPermissionChecker permissionChecker)
         {
             _fileChecker = fileChecker;
             _textFileChecker = textFileChecker;
             _permissionsChecker = permissionChecker;
-            _fileName = fileName;
         }
 
-        public int Validate()
+        public int Validate(string fileName)
         {
-            if (!_fileChecker.FileExists(_fileName))
+            if (!_fileChecker.FileExists(fileName))
                 return 1;
-            if (!_textFileChecker.IsTextFile(_fileName))
+            if (!_textFileChecker.IsTextFile(fileName))
                 return 2;
-            if (!_permissionsChecker.CanReadFile(_fileName))
+            if (!_permissionsChecker.CanReadFile(fileName))
                 return 3;
             return 0;
         }
