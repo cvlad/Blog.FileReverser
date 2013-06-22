@@ -36,6 +36,13 @@ namespace FileReverser.App
                 if (validationResult.HasValue)
                     return validationResult.Value;
 
+                fileReverser.PromptForOutput();
+
+                var outputFile = fileReverser.ReadInput();
+                validationResult = fileReverser.ValidateOutput(outputFile);
+                if (validationResult.HasValue)
+                    return validationResult.Value;
+
                 return 0;
             }
         }
