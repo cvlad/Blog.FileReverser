@@ -14,7 +14,7 @@ namespace FileReverser.Facts
             // Given
             var outputterMock = new Mock<IOutputter>();
             outputterMock.Setup(o => o.Write(App.FileReverser.InputMessage)).Verifiable();
-            var fileReverser = new App.FileReverser(outputterMock.Object, null, null, null);
+            var fileReverser = new App.FileReverser(outputterMock.Object, null, null, null, null);
 
             // When
             fileReverser.PromptForInput();
@@ -30,7 +30,7 @@ namespace FileReverser.Facts
             var inputMock = new Mock<IInput>();
             inputMock.Setup(i => i.Read()).Verifiable();
             var validatorStub = new Mock<IInputValidator>();
-            var fileReverser = new App.FileReverser(null, inputMock.Object, validatorStub.Object, null);
+            var fileReverser = new App.FileReverser(null, inputMock.Object, validatorStub.Object, null, null);
 
             // When
             fileReverser.ReadInput();
@@ -45,7 +45,7 @@ namespace FileReverser.Facts
             // Given
             var validatorMock = new Mock<IInputValidator>();
             validatorMock.Setup(v => v.Validate(It.IsAny<string>())).Verifiable();
-            var fileReverser = new App.FileReverser(null, null, validatorMock.Object, null);
+            var fileReverser = new App.FileReverser(null, null, validatorMock.Object, null, null);
 
             // When
             fileReverser.ValidateInput(string.Empty);
@@ -64,7 +64,7 @@ namespace FileReverser.Facts
             // Given
             var validatorStub = new Mock<IInputValidator>();
             validatorStub.Setup(v => v.Validate(It.IsAny<string>())).Returns(validatorResult);
-            var fileReverser = new App.FileReverser(null, null, validatorStub.Object, null);
+            var fileReverser = new App.FileReverser(null, null, validatorStub.Object, null, null);
 
             // When
             var result = fileReverser.ValidateInput(string.Empty);
@@ -79,7 +79,7 @@ namespace FileReverser.Facts
             // Given
             var outputterMock = new Mock<IOutputter>();
             outputterMock.Setup(o => o.Write(App.FileReverser.OutputMessage)).Verifiable();
-            var fileReverser = new App.FileReverser(outputterMock.Object, null, null, null);
+            var fileReverser = new App.FileReverser(outputterMock.Object, null, null, null, null);
 
             // When
             fileReverser.PromptForOutput();
@@ -94,7 +94,7 @@ namespace FileReverser.Facts
             // Given
             var validatorMock = new Mock<IOutputValidator>();
             validatorMock.Setup(v => v.Validate(It.IsAny<string>())).Verifiable();
-            var fileReverser = new App.FileReverser(null, null, null, validatorMock.Object);
+            var fileReverser = new App.FileReverser(null, null, null, validatorMock.Object, null);
 
             // When
             fileReverser.ValidateOutput(string.Empty);
@@ -113,13 +113,28 @@ namespace FileReverser.Facts
             // Given
             var validatorStub = new Mock<IOutputValidator>();
             validatorStub.Setup(v => v.Validate(It.IsAny<string>())).Returns(validatorResult);
-            var fileReverser = new App.FileReverser(null, null, null, validatorStub.Object);
+            var fileReverser = new App.FileReverser(null, null, null, validatorStub.Object, null);
 
             // When
             var result = fileReverser.ValidateOutput(string.Empty);
 
             // Then
             result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void FileReverser_should_use_the_reverser_implementation()
+        {
+            // Given
+            var reverserImplMock = new Mock<IReverserImplementation>();
+            reverserImplMock.Setup(r => r.Reverse(It.IsAny<string>(), It.IsAny<string>())).Verifiable();
+            var fileReverser = new App.FileReverser(null, null, null, null, reverserImplMock.Object);
+
+            // When
+            fileReverser.Reverse(string.Empty, string.Empty);
+
+            // Then
+            reverserImplMock.Verify();
         }
     }
 }

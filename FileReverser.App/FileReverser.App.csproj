@@ -53,21 +53,27 @@
     <Compile Include="ConsoleOutputter.cs" />
     <Compile Include="FileChecker.cs" />
     <Compile Include="FileCreate.cs" />
+    <Compile Include="FileReader.cs" />
     <Compile Include="FileReverser.cs" />
+    <Compile Include="FileWriter.cs" />
     <Compile Include="IFileChecker.cs" />
     <Compile Include="IFileCreate.cs" />
+    <Compile Include="IFileReader.cs" />
     <Compile Include="IFileReverser.cs" />
+    <Compile Include="IFileWriter.cs" />
     <Compile Include="IInput.cs" />
     <Compile Include="IInputValidator.cs" />
     <Compile Include="InputFileValidator.cs" />
     <Compile Include="IOutputter.cs" />
     <Compile Include="IOutputValidator.cs" />
     <Compile Include="IPermissionChecker.cs" />
+    <Compile Include="IReverserImplementation.cs" />
     <Compile Include="ITextFileChecker.cs" />
     <Compile Include="OutputFileValidator.cs" />
     <Compile Include="PermissionChecker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReverserImplementation.cs" />
     <Compile Include="TextFileChecker.cs" />
   </ItemGroup>
   <ItemGroup>

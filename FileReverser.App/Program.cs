@@ -43,6 +43,8 @@ namespace FileReverser.App
                 if (validationResult.HasValue)
                     return validationResult.Value;
 
+                fileReverser.Reverse(inputFile, outputFile);
+
                 return 0;
             }
         }

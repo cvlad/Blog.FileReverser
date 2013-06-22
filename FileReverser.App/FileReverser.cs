@@ -6,16 +6,18 @@
         private readonly IInput _input;
         private readonly IInputValidator _inputValidator;
         private readonly IOutputValidator _outputValidator;
+        private readonly IReverserImplementation _reverserImplementation;
 
         public const string InputMessage = "Please enter the full path and name of the input file: ";
         public const string OutputMessage = "Please enter the full path and name of the output file: ";
 
-        public FileReverser(IOutputter outputter, IInput input, IInputValidator inputValidator, IOutputValidator outputValidator)
+        public FileReverser(IOutputter outputter, IInput input, IInputValidator inputValidator, IOutputValidator outputValidator, IReverserImplementation reverserImplementation)
         {
             _outputter = outputter;
             _input = input;
             _inputValidator = inputValidator;
             _outputValidator = outputValidator;
+            _reverserImplementation = reverserImplementation;
         }
 
         public void PromptForInput()
@@ -43,6 +45,11 @@
         {
             var result = _outputValidator.Validate(input);
             return result == 0 ? null : (int?)result;
+        }
+
+        public void Reverse(string inputFile, string outputFile)
+        {
+            _reverserImplementation.Reverse(inputFile, outputFile);
         }
     }
 }

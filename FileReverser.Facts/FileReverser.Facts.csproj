@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="FileReverserFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReverserImplementationFacts.cs" />
     <Compile Include="ValidatorFacts.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,5 +7,6 @@
         int? ValidateInput(string file);
         void PromptForOutput();
         int? ValidateOutput(string file);
+        void Reverse(string inputFile, string outputFile);
     }
 }
